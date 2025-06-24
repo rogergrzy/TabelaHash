@@ -1,0 +1,79 @@
+Funções Hash:
+
+1) Resto da divisão:
+- Pega o resto da divisão do CÓDIGO (123456789) pelo TAMANHO DA TABELA (1000).
+- É o mais simples e comum, funciona melhor com quando o tamanho da tabela é primo.
+-- indice = codigo % tamanhoTabela
+
+
+2) Multiplicação:
+- Multiplica o CÓDIGO (123456789) por uma constante A (proporção áurea),
+- pegamos a parte fracionária do resultado
+- e multiplicamos pelo TAMANHO DA TABELA para obter o índice.
+- Tende a funcionar bem para qualquer tamanho de tabela.
+-- indice = (int) (tamanhoTabela * ((codigo * A) % 1))
+-- double produto = codigo * A; double parteFracionaria = produto - (long) produto;
+
+
+3) Dobramento:
+- Dividimos o CÓDIGO em partes e depois somamos as partes. O índice
+- é o resto da divisão dessa soma pelo TAMANHO DA TABELA.
+- Divide: 123456789 em 123 456 789, então 123 + 456 + 789 = 1368 % tamanhoTabela = indice
+
+
+
+
+Iniciando análise de desempenho de Tabelas Hash
+Seed para geração de dados: 12345
+-------------------------------------------------
+
+===== CONJUNTO DE DADOS COM 10000 REGISTROS =====
+
+  --- Tabela Hash com Tamanho 1000 ---
+    Função: DIVISAO         | Inserção:     1 ms | Colisões:     9000 | Busca:     1 ms | Comp. Média: 5
+    Função: MULTIPLICACAO   | Inserção:     1 ms | Colisões:     9000 | Busca:     1 ms | Comp. Média: 6
+    Função: DOBRAMENTO      | Inserção:     0 ms | Colisões:     9000 | Busca:     0 ms | Comp. Média: 6
+
+  --- Tabela Hash com Tamanho 10000 ---
+    Função: DIVISAO         | Inserção:     0 ms | Colisões:     3648 | Busca:     0 ms | Comp. Média: 1
+    Função: MULTIPLICACAO   | Inserção:     0 ms | Colisões:     3660 | Busca:     0 ms | Comp. Média: 1
+    Função: DOBRAMENTO      | Inserção:     0 ms | Colisões:     7856 | Busca:     0 ms | Comp. Média: 3
+
+  --- Tabela Hash com Tamanho 100000 ---
+    Função: DIVISAO         | Inserção:     0 ms | Colisões:      474 | Busca:     0 ms | Comp. Média: 1
+    Função: MULTIPLICACAO   | Inserção:     0 ms | Colisões:      461 | Busca:     0 ms | Comp. Média: 1
+    Função: DOBRAMENTO      | Inserção:     0 ms | Colisões:     7856 | Busca:     0 ms | Comp. Média: 3
+
+===== CONJUNTO DE DADOS COM 100000 REGISTROS =====
+
+  --- Tabela Hash com Tamanho 1000 ---
+    Função: DIVISAO         | Inserção:     1 ms | Colisões:    99000 | Busca:    61 ms | Comp. Média: 50
+    Função: MULTIPLICACAO   | Inserção:     0 ms | Colisões:    99000 | Busca:    60 ms | Comp. Média: 51
+    Função: DOBRAMENTO      | Inserção:     0 ms | Colisões:    99000 | Busca:    58 ms | Comp. Média: 50
+
+  --- Tabela Hash com Tamanho 10000 ---
+    Função: DIVISAO         | Inserção:     0 ms | Colisões:    90000 | Busca:     7 ms | Comp. Média: 5
+    Função: MULTIPLICACAO   | Inserção:     1 ms | Colisões:    90002 | Busca:     8 ms | Comp. Média: 6
+    Função: DOBRAMENTO      | Inserção:     0 ms | Colisões:    97317 | Busca:    35 ms | Comp. Média: 29
+
+  --- Tabela Hash com Tamanho 100000 ---
+    Função: DIVISAO         | Inserção:     1 ms | Colisões:    36735 | Busca:     2 ms | Comp. Média: 1
+    Função: MULTIPLICACAO   | Inserção:     2 ms | Colisões:    36902 | Busca:     3 ms | Comp. Média: 1
+    Função: DOBRAMENTO      | Inserção:     0 ms | Colisões:    97317 | Busca:    35 ms | Comp. Média: 29
+
+===== CONJUNTO DE DADOS COM 1000000 REGISTROS =====
+
+  --- Tabela Hash com Tamanho 1000 ---
+    Função: DIVISAO         | Inserção:    17 ms | Colisões:   999000 | Busca: 21779 ms | Comp. Média: 500
+    Função: MULTIPLICACAO   | Inserção:     9 ms | Colisões:   999000 | Busca: 16967 ms | Comp. Média: 500
+    Função: DOBRAMENTO      | Inserção:     8 ms | Colisões:   999000 | Busca: 20352 ms | Comp. Média: 500
+
+  --- Tabela Hash com Tamanho 10000 ---
+    Função: DIVISAO         | Inserção:     9 ms | Colisões:   990000 | Busca:  1675 ms | Comp. Média: 50
+    Função: MULTIPLICACAO   | Inserção:    11 ms | Colisões:   990000 | Busca:  1653 ms | Comp. Média: 50
+    Função: DOBRAMENTO      | Inserção:     9 ms | Colisões:   997179 | Busca:  8485 ms | Comp. Média: 284
+
+  --- Tabela Hash com Tamanho 100000 ---
+    Função: DIVISAO         | Inserção:    67 ms | Colisões:   900005 | Busca:   199 ms | Comp. Média: 5
+    Função: MULTIPLICACAO   | Inserção:    25 ms | Colisões:   900002 | Busca:   259 ms | Comp. Média: 5
+    Função: DOBRAMENTO      | Inserção:    29 ms | Colisões:   997179 | Busca:  3973 ms | Comp. Média: 284
