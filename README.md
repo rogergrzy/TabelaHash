@@ -128,4 +128,4 @@ Este trabalho permitiu validar empiricamente os conceitos teóricos de Tabelas H
 3.  **A Qualidade da Função de Hash é Soberana:** O projeto demonstrou que uma função de hash mal implementada pode inutilizar completamente a estrutura de dados, independentemente da arquitetura de tratamento de colisões. A performance de uma tabela hash é, antes de tudo, um reflexo da qualidade de sua função de espalhamento.
 
 ---
-**Autor:** *[Seu Nome Aqui]*
+**Autor:** *Rogério Vinicius*
